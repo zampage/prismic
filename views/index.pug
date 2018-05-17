@@ -1,0 +1,17 @@
+extends ./layout.pug
+
+block body
+    header
+        div.container
+            div.header-content
+                div.title
+                    != PrismicDOM.RichText.asHtml(page.data.page_title, ctx.linkResolver)
+                    != PrismicDOM.RichText.asHtml(page.data.page_subtitle, ctx.linkResolver)
+                img(src=page.data.page_banner.url, alt=page.data.page_banner.alt)
+    main
+        div.container
+            each slice in page.data.body
+                article
+                    != PrismicDOM.RichText.asHtml(slice.primary.article_title)
+                    each item in slice.items
+                        != PrismicDOM.RichText.asHtml(item.article_content)
